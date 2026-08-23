@@ -1,0 +1,16 @@
+{
+  "name": "genyo-modernist-timer",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Mostra tempo restante do expediente no Genyo",
+  "scripts": {
+    "dev": "node scripts/generate-icons.mjs && node scripts/build-extension.mjs --watch",
+    "build": "node scripts/generate-icons.mjs && node scripts/build-extension.mjs",
+    "icons": "node scripts/generate-icons.mjs"
+  },
+  "devDependencies": {
+    "@types/chrome": "^0.0.287",
+    "typescript": "^5.7.0",
+    "vite": "^6.0.0"
+  }
+}
