@@ -1,5 +1,5 @@
-import { deflateSync } from 'zlib';
-import { writeFileSync, mkdirSync } from 'fs';
+import { deflateSync } from "zlib";
+import { writeFileSync, mkdirSync } from "fs";
 
 const crcTable = new Uint32Array(256);
 for (let n = 0; n < 256; n++) {
@@ -47,14 +47,16 @@ function createPng(size, r, g, b) {
   }
   return Buffer.concat([
     sig,
-    chunk('IHDR', ihdr),
-    chunk('IDAT', deflateSync(raw)),
-    chunk('IEND', Buffer.alloc(0)),
+    chunk("IHDR", ihdr),
+    chunk("IDAT", deflateSync(raw)),
+    chunk("IEND", Buffer.alloc(0)),
   ]);
 }
 
-mkdirSync('public/icons', { recursive: true });
-const r = 0x00, g = 0x96, b = 0x88;
+mkdirSync("public/icons", { recursive: true });
+const r = 0x00,
+  g = 0x96,
+  b = 0x88;
 for (const s of [16, 48, 128]) {
   writeFileSync(`public/icons/${s}.png`, createPng(s, r, g, b));
   console.log(`  ✓ icons/${s}.png`);

@@ -1,10 +1,10 @@
-(function(){"use strict";const e="genyo-timer-exit-alert",n="genyo-timer-exit-alert-styles";chrome.runtime.onMessage.addListener(t=>{t.type==="GENYO_TIMER_SHOW_EXIT_ALERT"&&i(t.payload)});function i(t){a();const r=document.getElementById(e);r&&r.remove();const o=document.createElement("div");o.id=e,o.setAttribute("role","status"),o.innerHTML=`
+(function(){"use strict";const o="genyo-timer-exit-alert",a="genyo-timer-exit-alert-styles",s="https://app.modernisteb.com.br";chrome.runtime.onMessage.addListener(t=>{t.type==="GENYO_TIMER_SHOW_EXIT_ALERT"&&c(t.payload)});function c(t){d();const r=document.getElementById(o);r&&r.remove();const e=document.createElement("div");e.id=o,e.setAttribute("role","status"),e.innerHTML=`
     <button class="gt-alert-close" type="button" aria-label="Fechar">×</button>
-    <div class="gt-alert-title">Está perto da hora de saída</div>
-    <div class="gt-alert-time">Saída prevista: <strong>${d(t.saidaPrevista)}</strong></div>
-    <button class="gt-alert-action" type="button">Entendi</button>
-  `,o.querySelectorAll("button").forEach(s=>{s.addEventListener("click",()=>o.remove())}),document.body.appendChild(o),window.setTimeout(()=>o.remove(),3e4)}function a(){if(document.getElementById(n))return;const t=document.createElement("style");t.id=n,t.textContent=`
-    #${e} {
+    <div class="gt-alert-title">Hora de bater o ponto!</div>
+    <div class="gt-alert-time">Saída prevista: <strong>${l(t.saidaPrevista)}</strong></div>
+    <button class="gt-alert-action" type="button">Bater ponto</button>
+  `;const n=e.querySelector(".gt-alert-close");n==null||n.addEventListener("click",()=>e.remove());const i=e.querySelector(".gt-alert-action");i==null||i.addEventListener("click",()=>{e.remove(),window.open(s,"_blank")}),document.body.appendChild(e),window.setTimeout(()=>e.remove(),3e4)}function d(){if(document.getElementById(a))return;const t=document.createElement("style");t.id=a,t.textContent=`
+    #${o} {
       position: fixed;
       right: 18px;
       bottom: 18px;
@@ -21,7 +21,7 @@
       font-size: 14px;
       line-height: 1.4;
     }
-    #${e} .gt-alert-close {
+    #${o} .gt-alert-close {
       position: absolute;
       top: 8px;
       right: 8px;
@@ -35,21 +35,21 @@
       font-size: 22px;
       line-height: 1;
     }
-    #${e} .gt-alert-close:hover {
+    #${o} .gt-alert-close:hover {
       background: rgba(255, 255, 255, 0.1);
       color: #ffffff;
     }
-    #${e} .gt-alert-title {
+    #${o} .gt-alert-title {
       margin-right: 32px;
       color: #ffffff;
       font-size: 15px;
       font-weight: 700;
     }
-    #${e} .gt-alert-time {
+    #${o} .gt-alert-time {
       margin-top: 6px;
       color: #dbe3ee;
     }
-    #${e} .gt-alert-action {
+    #${o} .gt-alert-action {
       margin-top: 14px;
       min-height: 34px;
       padding: 0 14px;
@@ -60,7 +60,7 @@
       cursor: pointer;
       font-weight: 700;
     }
-    #${e} .gt-alert-action:hover {
+    #${o} .gt-alert-action:hover {
       background: #ffb224;
     }
-  `,document.head.appendChild(t)}function d(t){return t.replace(/[&<>"']/g,r=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"})[r])}})();
+  `,document.head.appendChild(t)}function l(t){return t.replace(/[&<>"']/g,r=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"})[r])}})();

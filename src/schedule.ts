@@ -1,4 +1,4 @@
-import { DadosDia, JornadaStatus } from './types';
+import { DadosDia, JornadaStatus } from "./types";
 import {
   agoraEmMinutos,
   calcularProgresso,
@@ -6,12 +6,13 @@ import {
   formatMinutes,
   parseHoraEmMinutos,
   parseToMinutes,
-} from './time';
+} from "./time";
 
-const ALERTA_MINIMO_MIN = 5;
-const ALERTA_MAXIMO_MIN = 10;
-
-export function calcularJornadaStatus(dados: DadosDia, horasDiarias: string, agora = new Date()): JornadaStatus {
+export function calcularJornadaStatus(
+  dados: DadosDia,
+  horasDiarias: string,
+  agora = new Date(),
+): JornadaStatus {
   const atualizadoEm = agora.getTime();
   const dataReferencia = formatarDataLocal(agora);
 
@@ -22,7 +23,9 @@ export function calcularJornadaStatus(dados: DadosDia, horasDiarias: string, ago
     const totalExpedienteMin = diariasMin + intervMin;
     const saidaPrevistaMin = entradaMin + totalExpedienteMin;
 
-    const saidaFinalMin = dados.horaSaida ? parseHoraEmMinutos(dados.horaSaida) : null;
+    const saidaFinalMin = dados.horaSaida
+      ? parseHoraEmMinutos(dados.horaSaida)
+      : null;
     const referenciaMin = saidaFinalMin ?? minutosDoDia(agora);
     const restanteMin = Math.max(0, saidaPrevistaMin - referenciaMin);
     const trabalhadasMin = Math.max(0, referenciaMin - entradaMin - intervMin);
@@ -37,10 +40,14 @@ export function calcularJornadaStatus(dados: DadosDia, horasDiarias: string, ago
         podeAlertar: false,
         atualizadoEm,
         dataReferencia,
-        estado: 'done',
+        estado: "done",
         progresso: calcularProgresso(trabalhadasMin, diariasMin),
-        textoRestante: deficitMin > 0 ? `Faltam ${formatMinutes(deficitMin)}` : 'Expediente completo!',
-        textoTrabalhadas: trabalhadasMin > 0 ? formatMinutes(trabalhadasMin) : '--',
+        textoRestante:
+          deficitMin > 0
+            ? `Faltam ${formatMinutes(deficitMin)}`
+            : "Expediente completo!",
+        textoTrabalhadas:
+          trabalhadasMin > 0 ? formatMinutes(trabalhadasMin) : "--",
         horasDiarias,
       };
     }
@@ -52,13 +59,14 @@ export function calcularJornadaStatus(dados: DadosDia, horasDiarias: string, ago
         saidaPrevistaMin,
         saidaPrevista: formatarHora(saidaPrevistaMin),
         restanteMin,
-        podeAlertar: estaNaJanelaDeAlerta(restanteMin),
+        podeAlertar: false,
         atualizadoEm,
         dataReferencia,
-        estado: 'working',
+        estado: "working",
         progresso: calcularProgresso(decorridoMin, totalExpedienteMin),
         textoRestante: `Faltam ${formatMinutes(restanteMin)}`,
-        textoTrabalhadas: trabalhadasMin > 0 ? formatMinutes(trabalhadasMin) : '--',
+        textoTrabalhadas:
+          trabalhadasMin > 0 ? formatMinutes(trabalhadasMin) : "--",
         horasDiarias,
       };
     }
@@ -67,43 +75,53 @@ export function calcularJornadaStatus(dados: DadosDia, horasDiarias: string, ago
       saidaPrevistaMin,
       saidaPrevista: formatarHora(saidaPrevistaMin),
       restanteMin: 0,
-      podeAlertar: false,
+      podeAlertar: true,
       atualizadoEm,
       dataReferencia,
-      estado: 'done',
+      estado: "overtime",
       progresso: 100,
-      textoRestante: 'Expediente completo!',
-      textoTrabalhadas: trabalhadasMin > 0 ? formatMinutes(trabalhadasMin) : '--',
+      textoRestante: "Hora de bater o ponto!",
+      textoTrabalhadas:
+        trabalhadasMin > 0 ? formatMinutes(trabalhadasMin) : "--",
       horasDiarias,
     };
   }
 
   return {
     saidaPrevistaMin: null,
-    saidaPrevista: '--:--',
+    saidaPrevista: "--:--",
     restanteMin: 0,
     podeAlertar: false,
     atualizadoEm,
     dataReferencia,
-    estado: 'done',
+    estado: "done",
     progresso: 0,
-    textoRestante: 'Aguardando registros...',
-    textoTrabalhadas: '--',
+    textoRestante: "Aguardando registros...",
+    textoTrabalhadas: "--",
     horasDiarias,
   };
 }
 
-export function atualizarRestante(status: JornadaStatus, agora = new Date()): JornadaStatus {
-  if (status.saidaPrevistaMin === null || status.dataReferencia !== formatarDataLocal(agora)) {
+export function atualizarRestante(
+  status: JornadaStatus,
+  agora = new Date(),
+): JornadaStatus {
+  if (
+    status.saidaPrevistaMin === null ||
+    status.dataReferencia !== formatarDataLocal(agora)
+  ) {
     return { ...status, restanteMin: 0, podeAlertar: false };
   }
 
-  const restanteMin = Math.max(0, status.saidaPrevistaMin - minutosDoDia(agora));
+  const restanteMin = Math.max(
+    0,
+    status.saidaPrevistaMin - minutosDoDia(agora),
+  );
   return {
     ...status,
     restanteMin,
-    podeAlertar: estaNaJanelaDeAlerta(restanteMin),
-    estado: restanteMin > 0 ? status.estado : 'done',
+    podeAlertar: restanteMin === 0 && status.estado !== "done",
+    estado: restanteMin > 0 ? status.estado : "done",
   };
 }
 
@@ -112,17 +130,13 @@ export function criarChaveAlerta(status: JornadaStatus): string | null {
   return `${status.dataReferencia}:${status.saidaPrevista}`;
 }
 
-function estaNaJanelaDeAlerta(restanteMin: number): boolean {
-  return restanteMin >= ALERTA_MINIMO_MIN && restanteMin <= ALERTA_MAXIMO_MIN;
-}
-
 function minutosDoDia(date: Date): number {
   return agoraEmMinutos(date);
 }
 
 function formatarDataLocal(date: Date): string {
   const ano = date.getFullYear();
-  const mes = String(date.getMonth() + 1).padStart(2, '0');
-  const dia = String(date.getDate()).padStart(2, '0');
+  const mes = String(date.getMonth() + 1).padStart(2, "0");
+  const dia = String(date.getDate()).padStart(2, "0");
   return `${ano}-${mes}-${dia}`;
 }

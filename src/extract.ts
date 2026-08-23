@@ -1,10 +1,10 @@
-import { DadosDia } from './types';
+import { DadosDia } from "./types";
 
 export function extrairDados(): DadosDia | null {
   const secaoExtrato = encontrarSecaoExtrato();
   if (!secaoExtrato) return null;
 
-  const cards = secaoExtrato.querySelectorAll(':scope > .space-y-4 > div');
+  const cards = secaoExtrato.querySelectorAll(":scope > .space-y-4 > div");
   if (cards.length === 0) return null;
 
   let horaEntrada: string | null = null;
@@ -15,20 +15,20 @@ export function extrairDados(): DadosDia | null {
   const textoBotaoPrincipal = extrairTextoBotaoPrincipal();
 
   for (const card of cards) {
-    const labelEl = card.querySelector('p');
+    const labelEl = card.querySelector("p");
     if (!labelEl) continue;
 
-    const label = (labelEl.textContent ?? '').trim();
-    const horaEl = card.querySelector('.text-lg, .font-mono');
+    const label = (labelEl.textContent ?? "").trim();
+    const horaEl = card.querySelector(".text-lg, .font-mono");
     const hora = horaEl?.textContent?.trim() ?? null;
 
-    if (label === 'Entrada' && hora) {
+    if (label === "Entrada" && hora) {
       horaEntrada = hora;
-    } else if (label === 'Saída' && hora) {
+    } else if (label === "Saída" && hora) {
       horaSaida = hora;
-    } else if (label === 'Início da Pausa' && hora) {
+    } else if (label === "Início da Pausa" && hora) {
       inicioPausa = hora;
-    } else if (label === 'Retorno da Pausa' && hora) {
+    } else if (label === "Retorno da Pausa" && hora) {
       retornoPausa = hora;
     }
   }
@@ -40,16 +40,16 @@ export function extrairDados(): DadosDia | null {
     intervalosMin = Math.max(0, retorno - inicio);
   }
 
-  let status: DadosDia['status'] = 'desconhecido';
+  let status: DadosDia["status"] = "desconhecido";
   if (textoBotaoPrincipal) {
-    status = textoBotaoPrincipal.includes('Entrada') ? 'Saida' : 'Entrada';
+    status = textoBotaoPrincipal.includes("Entrada") ? "Saida" : "Entrada";
   }
 
   return {
-    horasPrevistas: '00:00',
-    horasTrabalhadas: '00:00',
-    saldo: '00:00',
-    abonos: '00:00',
+    horasPrevistas: "00:00",
+    horasTrabalhadas: "00:00",
+    saldo: "00:00",
+    abonos: "00:00",
     intervalos: formatarMinutos(intervalosMin),
     horaEntrada,
     horaSaida,
@@ -58,10 +58,10 @@ export function extrairDados(): DadosDia | null {
 }
 
 function encontrarSecaoExtrato(): Element | null {
-  const headings = document.querySelectorAll('h3');
+  const headings = document.querySelectorAll("h3");
   for (const h of headings) {
-    if ((h.textContent ?? '').trim().includes('Seu Extrato Hoje')) {
-      const container = h.closest('.border');
+    if ((h.textContent ?? "").trim().includes("Seu Extrato Hoje")) {
+      const container = h.closest(".border");
       if (container) return container;
     }
   }
@@ -69,10 +69,15 @@ function encontrarSecaoExtrato(): Element | null {
 }
 
 function extrairTextoBotaoPrincipal(): string | null {
-  const botoes = document.querySelectorAll('button');
+  const botoes = document.querySelectorAll("button");
   for (const btn of botoes) {
-    const texto = (btn.textContent ?? '').trim();
-    if (texto === 'Registrar Entrada' || texto === 'Registrar Nova Entrada' || texto === 'Registrar Saída' || texto === 'Registrar Nova Saída') {
+    const texto = (btn.textContent ?? "").trim();
+    if (
+      texto === "Registrar Entrada" ||
+      texto === "Registrar Nova Entrada" ||
+      texto === "Registrar Saída" ||
+      texto === "Registrar Nova Saída"
+    ) {
       return texto;
     }
   }
@@ -80,12 +85,12 @@ function extrairTextoBotaoPrincipal(): string | null {
 }
 
 function parseHoraEmMinutos(horaStr: string): number {
-  const [h, m] = horaStr.split(':').map(Number);
+  const [h, m] = horaStr.split(":").map(Number);
   return h * 60 + m;
 }
 
 function formatarMinutos(mins: number): string {
   const h = Math.floor(mins / 60);
   const m = mins % 60;
-  return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`;
+  return `${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}`;
 }

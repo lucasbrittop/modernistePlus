@@ -6,10 +6,10 @@ export interface DadosDia {
   intervalos: string;
   horaEntrada: string | null;
   horaSaida: string | null;
-  status: 'Entrada' | 'Saida' | 'desconhecido';
+  status: "Entrada" | "Saida" | "desconhecido";
 }
 
-export type JornadaEstado = 'working' | 'done' | 'overtime';
+export type JornadaEstado = "working" | "done" | "overtime";
 
 export interface JornadaStatus {
   saidaPrevistaMin: number | null;
@@ -26,11 +26,11 @@ export interface JornadaStatus {
 }
 
 export interface ShowExitAlertMessage {
-  type: 'GENYO_TIMER_SHOW_EXIT_ALERT';
+  type: "GENYO_TIMER_SHOW_EXIT_ALERT";
   payload: JornadaStatus;
 }
 
-export const GENYO_TIMER_STORAGE_KEY = 'genyoTimerStatus';
-export const GENYO_TIMER_LAST_ALERTED_KEY = 'genyoTimerLastAlertedExitKey';
-export const GENYO_TIMER_DAILY_HOURS_KEY = 'genyoTimerDailyHours';
-export const DEFAULT_DAILY_HOURS = '08:00';
+export const GENYO_TIMER_STORAGE_KEY = "genyoTimerStatus";
+export const GENYO_TIMER_LAST_ALERTED_KEY = "genyoTimerLastAlertedExitKey";
+export const GENYO_TIMER_DAILY_HOURS_KEY = "genyoTimerDailyHours";
+export const DEFAULT_DAILY_HOURS = "08:00";
