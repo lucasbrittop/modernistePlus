@@ -1,10 +1,12 @@
-import { JornadaStatus, ShowExitAlertMessage } from './types';
+import { JornadaStatus, ShowExitAlertMessage } from "./types";
 
-const POPUP_ID = 'genyo-timer-exit-alert';
-const STYLE_ID = 'genyo-timer-exit-alert-styles';
+const POPUP_ID = "genyo-timer-exit-alert";
+const STYLE_ID = "genyo-timer-exit-alert-styles";
+
+const MODERNIST_URL = "https://app.modernisteb.com.br";
 
 chrome.runtime.onMessage.addListener((message: ShowExitAlertMessage) => {
-  if (message.type !== 'GENYO_TIMER_SHOW_EXIT_ALERT') return;
+  if (message.type !== "GENYO_TIMER_SHOW_EXIT_ALERT") return;
   mostrarPopup(message.payload);
 });
 
@@ -14,18 +16,23 @@ function mostrarPopup(status: JornadaStatus): void {
   const existente = document.getElementById(POPUP_ID);
   if (existente) existente.remove();
 
-  const popup = document.createElement('div');
+  const popup = document.createElement("div");
   popup.id = POPUP_ID;
-  popup.setAttribute('role', 'status');
+  popup.setAttribute("role", "status");
   popup.innerHTML = `
     <button class="gt-alert-close" type="button" aria-label="Fechar">×</button>
-    <div class="gt-alert-title">Está perto da hora de saída</div>
+    <div class="gt-alert-title">Hora de bater o ponto!</div>
     <div class="gt-alert-time">Saída prevista: <strong>${escapeHtml(status.saidaPrevista)}</strong></div>
-    <button class="gt-alert-action" type="button">Entendi</button>
+    <button class="gt-alert-action" type="button">Bater ponto</button>
   `;
 
-  popup.querySelectorAll('button').forEach((button) => {
-    button.addEventListener('click', () => popup.remove());
+  const closeBtn = popup.querySelector(".gt-alert-close");
+  closeBtn?.addEventListener("click", () => popup.remove());
+
+  const actionBtn = popup.querySelector(".gt-alert-action");
+  actionBtn?.addEventListener("click", () => {
+    popup.remove();
+    window.open(MODERNIST_URL, "_blank");
   });
 
   document.body.appendChild(popup);
@@ -35,7 +42,7 @@ function mostrarPopup(status: JornadaStatus): void {
 function injectStyles(): void {
   if (document.getElementById(STYLE_ID)) return;
 
-  const style = document.createElement('style');
+  const style = document.createElement("style");
   style.id = STYLE_ID;
   style.textContent = `
     #${POPUP_ID} {
@@ -104,11 +111,11 @@ function injectStyles(): void {
 function escapeHtml(value: string): string {
   return value.replace(/[&<>"']/g, (char) => {
     const entities: Record<string, string> = {
-      '&': '&amp;',
-      '<': '&lt;',
-      '>': '&gt;',
-      '"': '&quot;',
-      "'": '&#39;',
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#39;",
     };
     return entities[char];
   });

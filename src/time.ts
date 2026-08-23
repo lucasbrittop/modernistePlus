@@ -1,8 +1,8 @@
 export function parseToMinutes(timeStr: string): number {
   const cleaned = timeStr.trim();
-  if (!cleaned || cleaned === '-') return 0;
-  const negative = cleaned.startsWith('-');
-  const [h, m] = cleaned.replace(/^-/, '').split(':').map(Number);
+  if (!cleaned || cleaned === "-") return 0;
+  const negative = cleaned.startsWith("-");
+  const [h, m] = cleaned.replace(/^-/, "").split(":").map(Number);
   const minutes = h * 60 + m;
   return negative ? -minutes : minutes;
 }
@@ -17,7 +17,7 @@ export function formatMinutes(mins: number): string {
 }
 
 export function parseHoraEmMinutos(horaStr: string): number {
-  const [h, m] = horaStr.split(':').map(Number);
+  const [h, m] = horaStr.split(":").map(Number);
   return h * 60 + m;
 }
 
@@ -28,10 +28,13 @@ export function agoraEmMinutos(date = new Date()): number {
 export function formatarHora(minutos: number): string {
   const h = Math.floor(minutos / 60) % 24;
   const m = minutos % 60;
-  return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`;
+  return `${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}`;
 }
 
-export function calcularProgresso(trabalhadasMin: number, previstasMin: number): number {
+export function calcularProgresso(
+  trabalhadasMin: number,
+  previstasMin: number,
+): number {
   if (previstasMin === 0) return 0;
   return Math.min(100, Math.round((trabalhadasMin / previstasMin) * 100));
 }

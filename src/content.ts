@@ -1,7 +1,12 @@
-import { criarBar, atualizarBar } from './bar';
-import { extrairDados } from './extract';
-import { calcularJornadaStatus } from './schedule';
-import { GENYO_TIMER_STORAGE_KEY, GENYO_TIMER_DAILY_HOURS_KEY, DEFAULT_DAILY_HOURS, JornadaStatus } from './types';
+import { criarBar, atualizarBar } from "./bar";
+import { extrairDados } from "./extract";
+import { calcularJornadaStatus } from "./schedule";
+import {
+  GENYO_TIMER_STORAGE_KEY,
+  GENYO_TIMER_DAILY_HOURS_KEY,
+  DEFAULT_DAILY_HOURS,
+  JornadaStatus,
+} from "./types";
 
 let horasDiarias = DEFAULT_DAILY_HOURS;
 let observer: MutationObserver | null = null;
@@ -61,8 +66,8 @@ function atualizar(): void {
     atualizarBar(status);
     salvarStatus(status);
   } else {
-    const el = document.getElementById('gt-tempo-restante');
-    if (el) el.textContent = 'Aguardando dados...';
+    const el = document.getElementById("gt-tempo-restante");
+    if (el) el.textContent = "Aguardando dados...";
   }
 }
 
@@ -84,14 +89,15 @@ function salvarStatus(status: JornadaStatus): void {
 if (chrome?.storage?.onChanged) {
   chrome.storage.onChanged.addListener((changes) => {
     if (changes[GENYO_TIMER_DAILY_HOURS_KEY]) {
-      horasDiarias = changes[GENYO_TIMER_DAILY_HOURS_KEY].newValue ?? DEFAULT_DAILY_HOURS;
+      horasDiarias =
+        changes[GENYO_TIMER_DAILY_HOURS_KEY].newValue ?? DEFAULT_DAILY_HOURS;
       atualizar();
     }
   });
 }
 
-if (document.readyState === 'complete') {
+if (document.readyState === "complete") {
   iniciar();
 } else {
-  window.addEventListener('load', () => iniciar());
+  window.addEventListener("load", () => iniciar());
 }

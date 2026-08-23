@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "Mordenist Timer",
+  "name": "Genyo Timer",
   "version": "1.0.0",
   "description": "Mostra quanto tempo falta para completar o expediente no Modernist",
   "icons": {

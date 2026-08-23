@@ -1,13 +1,17 @@
-import { JornadaStatus, GENYO_TIMER_DAILY_HOURS_KEY, DEFAULT_DAILY_HOURS } from './types';
+import {
+  JornadaStatus,
+  GENYO_TIMER_DAILY_HOURS_KEY,
+  DEFAULT_DAILY_HOURS,
+} from "./types";
 
-const BAR_ID = 'genyo-timer-floating-bar';
-const INPUT_ID = 'gt-daily-hours-input';
+const BAR_ID = "genyo-timer-floating-bar";
+const INPUT_ID = "gt-daily-hours-input";
 
 export function criarBar(horasSalvas: string): HTMLElement {
   const existente = document.getElementById(BAR_ID);
   if (existente) return existente;
 
-  const bar = document.createElement('div');
+  const bar = document.createElement("div");
   bar.id = BAR_ID;
   bar.innerHTML = `
     <div class="gt-container">
@@ -46,13 +50,13 @@ export function criarBar(horasSalvas: string): HTMLElement {
 
   const input = bar.querySelector(`#${INPUT_ID}`) as HTMLInputElement;
   if (input) {
-    input.addEventListener('blur', () => salvarHorasInput(input));
-    input.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') input.blur();
+    input.addEventListener("blur", () => salvarHorasInput(input));
+    input.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") input.blur();
     });
-    input.addEventListener('input', () => {
-      if (input.value.length === 2 && !input.value.includes(':')) {
-        input.value = input.value + ':';
+    input.addEventListener("input", () => {
+      if (input.value.length === 2 && !input.value.includes(":")) {
+        input.value = input.value + ":";
       }
     });
   }
@@ -62,18 +66,28 @@ export function criarBar(horasSalvas: string): HTMLElement {
 }
 
 export function atualizarBar(status: JornadaStatus): void {
-  const tempoRestante = document.getElementById('gt-tempo-restante');
-  const tempoTrabalhado = document.getElementById('gt-tempo-trabalhado');
-  const progressBar = document.getElementById('gt-progress-bar');
-  const saidaPrevista = document.getElementById('gt-saida-prevista');
+  const tempoRestante = document.getElementById("gt-tempo-restante");
+  const tempoTrabalhado = document.getElementById("gt-tempo-trabalhado");
+  const progressBar = document.getElementById("gt-progress-bar");
+  const saidaPrevista = document.getElementById("gt-saida-prevista");
   const bar = document.getElementById(BAR_ID);
   const input = document.getElementById(INPUT_ID) as HTMLInputElement;
 
-  if (!tempoRestante || !tempoTrabalhado || !progressBar || !saidaPrevista || !bar) return;
+  if (
+    !tempoRestante ||
+    !tempoTrabalhado ||
+    !progressBar ||
+    !saidaPrevista ||
+    !bar
+  )
+    return;
 
   tempoRestante.textContent = status.textoRestante;
   tempoTrabalhado.textContent = status.textoTrabalhadas;
-  saidaPrevista.textContent = status.estado === 'done' && status.saidaPrevistaMin === null ? '✓' : status.saidaPrevista;
+  saidaPrevista.textContent =
+    status.estado === "done" && status.saidaPrevistaMin === null
+      ? "✓"
+      : status.saidaPrevista;
   bar.className = `gt-status-${status.estado}`;
   progressBar.style.width = `${status.progresso}%`;
 
@@ -83,7 +97,7 @@ export function atualizarBar(status: JornadaStatus): void {
 }
 
 function salvarHorasInput(input: HTMLInputElement): void {
-  let valor = input.value.replace(/[^0-9:]/g, '');
+  let valor = input.value.replace(/[^0-9:]/g, "");
 
   const regex = /^(\d{1,2}):(\d{2})$/;
   const match = valor.match(regex);
@@ -93,7 +107,7 @@ function salvarHorasInput(input: HTMLInputElement): void {
   } else {
     const h = parseInt(match[1], 10);
     const m = Math.min(parseInt(match[2], 10), 59);
-    valor = `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`;
+    valor = `${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}`;
     input.value = valor;
   }
 
@@ -103,10 +117,10 @@ function salvarHorasInput(input: HTMLInputElement): void {
 }
 
 function injectStyles(): void {
-  if (document.getElementById('genyo-timer-styles')) return;
+  if (document.getElementById("genyo-timer-styles")) return;
 
-  const style = document.createElement('style');
-  style.id = 'genyo-timer-styles';
+  const style = document.createElement("style");
+  style.id = "genyo-timer-styles";
   style.textContent = `
     #genyo-timer-floating-bar {
       position: fixed;
@@ -228,11 +242,11 @@ function injectStyles(): void {
 function escapeHtml(value: string): string {
   return value.replace(/[&<>"']/g, (char) => {
     const entities: Record<string, string> = {
-      '&': '&amp;',
-      '<': '&lt;',
-      '>': '&gt;',
-      '"': '&quot;',
-      "'": '&#39;',
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#39;",
     };
     return entities[char];
   });

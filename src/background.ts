@@ -3,10 +3,10 @@ import {
   GENYO_TIMER_STORAGE_KEY,
   JornadaStatus,
   ShowExitAlertMessage,
-} from './types';
-import { atualizarRestante, criarChaveAlerta } from './schedule';
+} from "./types";
+import { atualizarRestante, criarChaveAlerta } from "./schedule";
 
-const ALARM_NAME = 'genyo-timer-check-exit';
+const ALARM_NAME = "genyo-timer-check-exit";
 
 chrome.runtime.onInstalled.addListener(() => {
   criarAlarme();
@@ -42,7 +42,7 @@ async function verificarAlertaSaida(): Promise<void> {
   if (!tab?.id) return;
 
   const message: ShowExitAlertMessage = {
-    type: 'GENYO_TIMER_SHOW_EXIT_ALERT',
+    type: "GENYO_TIMER_SHOW_EXIT_ALERT",
     payload: status,
   };
 
@@ -64,17 +64,17 @@ async function lerStatus(): Promise<JornadaStatus | null> {
 async function lerUltimoAlerta(): Promise<string | null> {
   const result = await chrome.storage.local.get(GENYO_TIMER_LAST_ALERTED_KEY);
   const value = result[GENYO_TIMER_LAST_ALERTED_KEY];
-  return typeof value === 'string' ? value : null;
+  return typeof value === "string" ? value : null;
 }
 
 function isJornadaStatus(value: unknown): value is JornadaStatus {
-  if (!value || typeof value !== 'object') return false;
+  if (!value || typeof value !== "object") return false;
   const status = value as JornadaStatus;
   return (
-    typeof status.saidaPrevista === 'string' &&
-    typeof status.restanteMin === 'number' &&
-    typeof status.podeAlertar === 'boolean' &&
-    typeof status.atualizadoEm === 'number' &&
-    typeof status.dataReferencia === 'string'
+    typeof status.saidaPrevista === "string" &&
+    typeof status.restanteMin === "number" &&
+    typeof status.podeAlertar === "boolean" &&
+    typeof status.atualizadoEm === "number" &&
+    typeof status.dataReferencia === "string"
   );
 }
