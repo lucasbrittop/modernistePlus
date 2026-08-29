@@ -14,11 +14,18 @@ let intervaloId: number | null = null;
 let tentativas = 0;
 
 function iniciar(): void {
-  carregarHorasDiarias().then((salvo) => {
-    horasDiarias = salvo ?? DEFAULT_DAILY_HOURS;
-    criarBar(horasDiarias);
-    iniciarObservacao();
-  });
+  Promise.all([carregarHorasDiarias(), carregarStatusSalvo()]).then(
+    ([horasSalvas, statusSalvo]) => {
+      horasDiarias = horasSalvas ?? DEFAULT_DAILY_HOURS;
+      criarBar(horasDiarias);
+
+      if (statusSalvo) {
+        atualizarBar(statusSalvo);
+      }
+
+      iniciarObservacao();
+    },
+  );
 }
 
 function iniciarObservacao(): void {
@@ -84,6 +91,25 @@ async function carregarHorasDiarias(): Promise<string | null> {
 function salvarStatus(status: JornadaStatus): void {
   if (!chrome?.storage?.local) return;
   chrome.storage.local.set({ [GENYO_TIMER_STORAGE_KEY]: status });
+}
+
+async function carregarStatusSalvo(): Promise<JornadaStatus | null> {
+  if (!chrome?.storage?.local) return null;
+  try {
+    const result = await chrome.storage.local.get(GENYO_TIMER_STORAGE_KEY);
+    const status = result[GENYO_TIMER_STORAGE_KEY];
+    if (
+      status &&
+      typeof status === "object" &&
+      typeof status.saidaPrevista === "string" &&
+      typeof status.restanteMin === "number"
+    ) {
+      return status as JornadaStatus;
+    }
+    return null;
+  } catch {
+    return null;
+  }
 }
 
 if (chrome?.storage?.onChanged) {
