@@ -1,4 +1,4 @@
-import { criarBar, atualizarBar } from "./bar";
+import { criarBar, atualizarBar } from "../components/bar/bar";
 import { extrairDados } from "./extract";
 import { calcularJornadaStatus } from "./schedule";
 import {
@@ -6,7 +6,7 @@ import {
   GENYO_TIMER_DAILY_HOURS_KEY,
   DEFAULT_DAILY_HOURS,
   JornadaStatus,
-} from "./types";
+} from "../shared/types";
 
 let horasDiarias = DEFAULT_DAILY_HOURS;
 let observer: MutationObserver | null = null;

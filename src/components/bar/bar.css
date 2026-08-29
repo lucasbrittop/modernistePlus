@@ -1,0 +1,113 @@
+#genyo-timer-floating-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 999999;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 13px;
+}
+.gt-container {
+  background: rgba(30, 30, 40, 0.92);
+  color: #e0e0e0;
+  padding: 6px 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(6px);
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+.gt-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  max-width: 700px;
+  width: 100%;
+}
+.gt-label { font-size: 14px; }
+.gt-value { font-weight: 600; min-width: 110px; }
+.gt-sep { color: rgba(255,255,255,0.2); }
+.gt-progress-container {
+  flex: 1;
+  height: 6px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.gt-progress-bar {
+  display: block;
+  height: 100%;
+  width: 0%;
+  background: #4caf50;
+  border-radius: 3px;
+  transition: width 30s linear;
+}
+.gt-status-working .gt-progress-bar { background: #ff9800; }
+.gt-status-overtime .gt-progress-bar { background: #f44336; }
+.gt-status-done .gt-progress-bar { background: #4caf50; }
+.gt-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 4px;
+  padding: 2px 6px;
+}
+.gt-input {
+  width: 42px;
+  background: transparent;
+  border: none;
+  color: #e0e0e0;
+  font-family: monospace;
+  font-size: 13px;
+  font-weight: 600;
+  outline: none;
+  text-align: center;
+  padding: 2px 0;
+}
+.gt-input::placeholder { color: rgba(255,255,255,0.3); }
+.gt-input-label {
+  font-size: 10px;
+  color: rgba(255,255,255,0.5);
+  text-transform: uppercase;
+}
+.gt-input-info {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.4);
+  font-size: 9px;
+  font-weight: 700;
+  font-style: italic;
+  font-family: serif;
+  cursor: help;
+  line-height: 1;
+  flex-shrink: 0;
+}
+.gt-input-info:hover {
+  background: rgba(255,255,255,0.3);
+  color: rgba(255,255,255,0.9);
+}
+.gt-input-tooltip {
+  display: none;
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0,0,0,0.85);
+  color: #e0e0e0;
+  font-size: 11px;
+  white-space: nowrap;
+  padding: 4px 10px;
+  border-radius: 4px;
+  pointer-events: none;
+  z-index: 10;
+}
+.gt-input-info:hover + .gt-input-tooltip {
+  display: block;
+}

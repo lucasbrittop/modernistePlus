@@ -1,4 +1,5 @@
-import { DadosDia } from "./types";
+import { DadosDia } from "../shared/types";
+import { parseHoraEmMinutos } from "./time";
 
 export function extrairDados(): DadosDia | null {
   const secaoExtrato = encontrarSecaoExtrato();
@@ -82,11 +83,6 @@ function extrairTextoBotaoPrincipal(): string | null {
     }
   }
   return null;
-}
-
-function parseHoraEmMinutos(horaStr: string): number {
-  const [h, m] = horaStr.split(":").map(Number);
-  return h * 60 + m;
 }
 
 function formatarMinutos(mins: number): string {

@@ -1,0 +1,30 @@
+<div class="gt-container">
+  <div class="gt-row">
+    <div class="gt-input-wrapper">
+      <input
+        id="{{INPUT_ID}}"
+        class="gt-input"
+        type="text"
+        maxlength="5"
+        placeholder="08:00"
+        value="{{HORAS_SALVAS}}"
+      />
+      <span class="gt-input-label">hrs/dia</span>
+      <span class="gt-input-info" aria-label="Jornada diária">i</span>
+      <span class="gt-input-tooltip">Jornada diária no formato HH:MM</span>
+    </div>
+    <span class="gt-sep">|</span>
+    <span class="gt-label">⏳</span>
+    <span class="gt-value" id="gt-tempo-restante">Carregando...</span>
+    <span class="gt-sep">|</span>
+    <span class="gt-label">⏱</span>
+    <span class="gt-value" id="gt-tempo-trabalhado">--</span>
+    <span class="gt-sep">|</span>
+    <div class="gt-progress-container">
+      <div class="gt-progress-bar" id="gt-progress-bar"></div>
+    </div>
+    <span class="gt-sep">|</span>
+    <span class="gt-label">🏁</span>
+    <span class="gt-value" id="gt-saida-prevista">--:--</span>
+  </div>
+</div>

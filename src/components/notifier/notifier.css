@@ -1,0 +1,59 @@
+#genyo-timer-exit-alert {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 2147483647;
+  box-sizing: border-box;
+  width: min(360px, calc(100vw - 32px));
+  padding: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 8px;
+  background: #20242c;
+  color: #f8fafc;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.32);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  line-height: 1.4;
+}
+#genyo-timer-exit-alert .gt-alert-close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 28px;
+  height: 28px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: #cbd5e1;
+  cursor: pointer;
+  font-size: 22px;
+  line-height: 1;
+}
+#genyo-timer-exit-alert .gt-alert-close:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+#genyo-timer-exit-alert .gt-alert-title {
+  margin-right: 32px;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 700;
+}
+#genyo-timer-exit-alert .gt-alert-time {
+  margin-top: 6px;
+  color: #dbe3ee;
+}
+#genyo-timer-exit-alert .gt-alert-action {
+  margin-top: 14px;
+  min-height: 34px;
+  padding: 0 14px;
+  border: 0;
+  border-radius: 6px;
+  background: #f59f00;
+  color: #141414;
+  cursor: pointer;
+  font-weight: 700;
+}
+#genyo-timer-exit-alert .gt-alert-action:hover {
+  background: #ffb224;
+}
