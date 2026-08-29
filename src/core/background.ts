@@ -3,7 +3,7 @@ import {
   GENYO_TIMER_STORAGE_KEY,
   JornadaStatus,
   ShowExitAlertMessage,
-} from "./types";
+} from "../shared/types";
 import { atualizarRestante, criarChaveAlerta } from "./schedule";
 
 const ALARM_NAME = "genyo-timer-check-exit";

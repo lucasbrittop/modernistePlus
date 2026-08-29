@@ -8,7 +8,7 @@ Extensão Chrome que exibe uma barra flutuante na plataforma [Modernist](https:/
 - **Tempo restante** — contagem regressiva até o fim do expediente
 - **Horas trabalhadas** — total acumulado do dia
 - **Previsão de saída** — horário estimado com base na jornada configurada
-- **Alerta de saída** — popup automático 5~10 minutos antes do fim da jornada
+- **Alerta de saída** — popup automático quando a jornada termina, com botão para bater ponto no Modernist
 - **Jornada configurável** — define as horas diárias diretamente na barra
 
 ## Como funciona
@@ -17,9 +17,9 @@ A extensão possui 3 componentes que se comunicam via `chrome.storage`:
 
 | Componente | Arquivo | Responsabilidade |
 |---|---|---|
-| Content Script | `content.ts` | Faz scraping do DOM do Modernist, calcula a jornada e renderiza a barra |
-| Background | `background.ts` | Worker de serviço com alarme periódico para disparar alertas |
-| Notifier | `notifier.ts` | Exibe popup de notificação na página quando o alarme dispara |
+| Content Script | `core/content.ts` | Faz scraping do DOM do Modernist, calcula a jornada e renderiza a barra |
+| Background | `core/background.ts` | Worker de serviço com alarme periódico para disparar alertas |
+| Notifier | `components/notifier/notifier.ts` | Exibe popup de notificação na página quando o alarme dispara |
 
 ## Desenvolvimento
 
@@ -54,14 +54,24 @@ npm install
 
 ```
 src/
-├── background.ts    # Service worker — alarme de alerta
-├── bar.ts           # Criação e atualização da barra flutuante
-├── content.ts       # Entry point do content script
-├── extract.ts       # Scraping do DOM do Modernist
-├── notifier.ts      # Popup de notificação de saída
-├── schedule.ts      # Cálculo de jornada de trabalho
-├── time.ts          # Utilitários de data/hora
-└── types.ts         # Interfaces e constantes compartilhadas
+├── components/
+│   ├── bar/
+│   │   ├── bar.ts           # Lógica da barra flutuante
+│   │   ├── bar.css          # Estilos da barra
+│   │   └── bar.html         # Template HTML da barra
+│   └── notifier/
+│       ├── notifier.ts      # Popup de notificação de saída
+│       ├── notifier.css     # Estilos do popup
+│       └── notifier.html    # Template HTML do popup
+├── core/
+│   ├── background.ts        # Service worker — alarme de alerta
+│   ├── content.ts           # Entry point do content script
+│   ├── extract.ts           # Scraping do DOM do Modernist
+│   ├── schedule.ts          # Cálculo de jornada de trabalho
+│   └── time.ts              # Utilitários de data/hora
+└── shared/
+    ├── types.ts             # Interfaces e constantes
+    └── utils.ts             # Funções utilitárias (escapeHtml)
 ```
 
 ## Stack

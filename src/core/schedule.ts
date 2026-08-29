@@ -1,4 +1,4 @@
-import { DadosDia, JornadaStatus } from "./types";
+import { DadosDia, JornadaStatus } from "../shared/types";
 import {
   agoraEmMinutos,
   calcularProgresso,

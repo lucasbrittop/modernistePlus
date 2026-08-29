@@ -7,9 +7,9 @@ const rootDir = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const outDir = resolve(rootDir, "dist");
 
 const entries = [
-  ["content", "src/content.ts"],
-  ["background", "src/background.ts"],
-  ["notifier", "src/notifier.ts"],
+  ["content", "src/core/content.ts"],
+  ["background", "src/core/background.ts"],
+  ["notifier", "src/components/notifier/notifier.ts"],
 ];
 const watch = process.argv.includes("--watch");
 
@@ -20,6 +20,7 @@ for (const [name, input] of entries) {
     root: rootDir,
     configFile: false,
     publicDir: false,
+    assetsInclude: ["**/*.html"],
     build: {
       outDir,
       emptyOutDir: false,
