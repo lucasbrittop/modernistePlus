@@ -1,7 +1,7 @@
 import { JornadaStatus, ShowExitAlertMessage } from "../../shared/types";
 import { escapeHtml } from "../../shared/utils";
-import notifierStyles from "./notifier.css?inline";
-import notifierHtml from "./notifier.html?inline";
+import notifierStyles from "./notifier.css?raw";
+import notifierHtml from "./notifier.html?raw";
 
 const POPUP_ID = "genyo-timer-exit-alert";
 const STYLE_ID = "genyo-timer-exit-alert-styles";

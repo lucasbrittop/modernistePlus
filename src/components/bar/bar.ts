@@ -4,8 +4,8 @@ import {
   DEFAULT_DAILY_HOURS,
 } from "../../shared/types";
 import { escapeHtml } from "../../shared/utils";
-import barStyles from "./bar.css?inline";
-import barHtml from "./bar.html?inline";
+import barStyles from "./bar.css?raw";
+import barHtml from "./bar.html?raw";
 
 const BAR_ID = "genyo-timer-floating-bar";
 const INPUT_ID = "gt-daily-hours-input";
