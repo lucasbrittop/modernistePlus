@@ -1,8 +1,8 @@
 {
   "name": "genyo-modernist-timer",
   "private": true,
-  "version": "1.0.0",
-  "description": "Mostra tempo restante do expediente no Genyo",
+  "version": "2.0.0",
+  "description": "Mostra tempo restante do expediente no modernist",
   "scripts": {
     "dev": "node scripts/generate-icons.mjs && node scripts/build-extension.mjs --watch",
     "build": "node scripts/generate-icons.mjs && node scripts/build-extension.mjs",
