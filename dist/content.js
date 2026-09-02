@@ -1,1 +1,144 @@
-(function(){"use strict";var L;const y="genyoTimerStatus",f="genyoTimerDailyHours",p="08:00";function N(t){return t.replace(/[&<>"']/g,e=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"})[e])}const H="#genyo-timer-floating-bar{position:fixed;bottom:0;left:0;right:0;z-index:999999;font-family:Open Sans,sans-serif;font-size:13px}.gt-container{background:#1e1e28eb;color:#e0e0e0;padding:6px 16px;display:flex;justify-content:center;align-items:center;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);border-top:1px solid rgba(255,255,255,.1)}.gt-row{display:flex;align-items:center;gap:10px;max-width:700px;width:100%}.gt-label{font-size:14px}.gt-value{font-weight:600;min-width:110px}.gt-sep{color:#fff3}.gt-progress-container{flex:1;height:6px;background:#ffffff26;border-radius:3px;overflow:hidden}.gt-progress-bar{display:block;height:100%;width:0%;background:#4caf50;border-radius:3px;transition:width 30s linear}.gt-status-working .gt-progress-bar{background:#ff9800}.gt-status-overtime .gt-progress-bar{background:#f44336}.gt-status-done .gt-progress-bar{background:#4caf50}.gt-input-wrapper{position:relative;display:flex;align-items:center;gap:4px;background:#ffffff1a;border-radius:4px;padding:2px 6px}.gt-input{width:42px;background:transparent;border:none;color:#e0e0e0;font-family:monospace;font-size:13px;font-weight:600;outline:none;text-align:center;padding:2px 0}.gt-input::placeholder{color:#ffffff4d}.gt-input-label{font-size:10px;color:#ffffff80;text-transform:uppercase}.gt-input-info{display:inline-flex;align-items:center;justify-content:center;width:14px;height:14px;border-radius:50%;background:#ffffff26;color:#fff6;font-size:9px;font-weight:700;font-style:italic;font-family:serif;cursor:help;line-height:1;flex-shrink:0}.gt-input-info:hover{background:#ffffff4d;color:#ffffffe6}.gt-input-tooltip{display:none;position:absolute;bottom:calc(100% + 8px);left:50%;transform:translate(-50%);background:#000000d9;color:#e0e0e0;font-size:11px;white-space:nowrap;padding:4px 10px;border-radius:4px;pointer-events:none;z-index:10}.gt-input-info:hover+.gt-input-tooltip{display:block}",Z="data:text/html;base64,PGRpdiBjbGFzcz0iZ3QtY29udGFpbmVyIj4KICA8ZGl2IGNsYXNzPSJndC1yb3ciPgogICAgPGRpdiBjbGFzcz0iZ3QtaW5wdXQtd3JhcHBlciI+CiAgICAgIDxpbnB1dAogICAgICAgIGlkPSJ7e0lOUFVUX0lEfX0iCiAgICAgICAgY2xhc3M9Imd0LWlucHV0IgogICAgICAgIHR5cGU9InRleHQiCiAgICAgICAgbWF4bGVuZ3RoPSI1IgogICAgICAgIHBsYWNlaG9sZGVyPSIwODowMCIKICAgICAgICB2YWx1ZT0ie3tIT1JBU19TQUxWQVN9fSIKICAgICAgLz4KICAgICAgPHNwYW4gY2xhc3M9Imd0LWlucHV0LWxhYmVsIj5ocnMvZGlhPC9zcGFuPgogICAgICA8c3BhbiBjbGFzcz0iZ3QtaW5wdXQtaW5mbyIgYXJpYS1sYWJlbD0iSm9ybmFkYSBkacOhcmlhIj5pPC9zcGFuPgogICAgICA8c3BhbiBjbGFzcz0iZ3QtaW5wdXQtdG9vbHRpcCI+Sm9ybmFkYSBkacOhcmlhIG5vIGZvcm1hdG8gSEg6TU08L3NwYW4+CiAgICA8L2Rpdj4KICAgIDxzcGFuIGNsYXNzPSJndC1zZXAiPnw8L3NwYW4+CiAgICA8c3BhbiBjbGFzcz0iZ3QtbGFiZWwiPuKPszwvc3Bhbj4KICAgIDxzcGFuIGNsYXNzPSJndC12YWx1ZSIgaWQ9Imd0LXRlbXBvLXJlc3RhbnRlIj5DYXJyZWdhbmRvLi4uPC9zcGFuPgogICAgPHNwYW4gY2xhc3M9Imd0LXNlcCI+fDwvc3Bhbj4KICAgIDxzcGFuIGNsYXNzPSJndC1sYWJlbCI+4o+xPC9zcGFuPgogICAgPHNwYW4gY2xhc3M9Imd0LXZhbHVlIiBpZD0iZ3QtdGVtcG8tdHJhYmFsaGFkbyI+LS08L3NwYW4+CiAgICA8c3BhbiBjbGFzcz0iZ3Qtc2VwIj58PC9zcGFuPgogICAgPGRpdiBjbGFzcz0iZ3QtcHJvZ3Jlc3MtY29udGFpbmVyIj4KICAgICAgPGRpdiBjbGFzcz0iZ3QtcHJvZ3Jlc3MtYmFyIiBpZD0iZ3QtcHJvZ3Jlc3MtYmFyIj48L2Rpdj4KICAgIDwvZGl2PgogICAgPHNwYW4gY2xhc3M9Imd0LXNlcCI+fDwvc3Bhbj4KICAgIDxzcGFuIGNsYXNzPSJndC1sYWJlbCI+8J+PgTwvc3Bhbj4KICAgIDxzcGFuIGNsYXNzPSJndC12YWx1ZSIgaWQ9Imd0LXNhaWRhLXByZXZpc3RhIj4tLTotLTwvc3Bhbj4KICA8L2Rpdj4KPC9kaXY+Cg==",S="genyo-timer-floating-bar",A="gt-daily-hours-input";function j(t){const e=document.getElementById(S);if(e)return e;const n=Z.replace("{{INPUT_ID}}",A).replace("{{HORAS_SALVAS}}",N(t)),a=document.createElement("div");a.id=S,a.innerHTML=n,k();const o=a.querySelector(`#${A}`);return o&&(o.addEventListener("blur",()=>W(o)),o.addEventListener("keydown",r=>{r.key==="Enter"&&o.blur()}),o.addEventListener("input",()=>{o.value.length===2&&!o.value.includes(":")&&(o.value=o.value+":")})),document.body.appendChild(a),a}function G(t){const e=document.getElementById("gt-tempo-restante"),n=document.getElementById("gt-tempo-trabalhado"),a=document.getElementById("gt-progress-bar"),o=document.getElementById("gt-saida-prevista"),r=document.getElementById(S),c=document.getElementById(A);!e||!n||!a||!o||!r||(e.textContent=t.textoRestante,n.textContent=t.textoTrabalhadas,o.textContent=t.estado==="done"&&t.saidaPrevistaMin===null?"✓":t.saidaPrevista,r.className=`gt-status-${t.estado}`,a.style.width=`${t.progresso}%`,c&&c!==document.activeElement&&(c.value=t.horasDiarias))}function W(t){var o;let e=t.value.replace(/[^0-9:]/g,"");const n=/^(\d{1,2}):(\d{2})$/,a=e.match(n);if(!a)t.value=p,e=p;else{const r=parseInt(a[1],10),c=Math.min(parseInt(a[2],10),59);e=`${String(r).padStart(2,"0")}:${String(c).padStart(2,"0")}`,t.value=e}(o=chrome==null?void 0:chrome.storage)!=null&&o.local&&chrome.storage.local.set({[f]:e})}function k(){if(document.getElementById("genyo-timer-styles"))return;const t=document.createElement("style");t.id="genyo-timer-styles",t.textContent=H,document.head.appendChild(t)}function z(t){const e=t.trim();if(!e||e==="-")return 0;const n=e.startsWith("-"),[a,o]=e.replace(/^-/,"").split(":").map(Number),r=a*60+o;return n?-r:r}function m(t){const e=Math.abs(t),n=Math.floor(e/60),a=e%60;return n===0?`${a}min`:a===0?`${n}h`:`${n}h${a}min`}function x(t){const[e,n]=t.split(":").map(Number);return e*60+n}function D(t=new Date){return t.getHours()*60+t.getMinutes()}function v(t){const e=Math.floor(t/60)%24,n=t%60;return`${String(e).padStart(2,"0")}:${String(n).padStart(2,"0")}`}function Y(t,e){return e===0?0:Math.min(100,Math.round(t/e*100))}function P(){var d;const t=T();if(!t)return null;const e=t.querySelectorAll(":scope > .space-y-4 > div");if(e.length===0)return null;let n=null,a=null,o=null,r=null;const c=J();for(const b of e){const g=b.querySelector("p");if(!g)continue;const u=(g.textContent??"").trim(),l=b.querySelector(".text-lg, .font-mono"),s=((d=l==null?void 0:l.textContent)==null?void 0:d.trim())??null;u==="Entrada"&&s?n=s:u==="Saída"&&s?a=s:u==="Início da Pausa"&&s?o=s:u==="Retorno da Pausa"&&s&&(r=s)}let h=0;if(o&&r){const b=x(o),g=x(r);h=Math.max(0,g-b)}let I="desconhecido";return c&&(I=c.includes("Entrada")?"Saida":"Entrada"),{horasPrevistas:"00:00",horasTrabalhadas:"00:00",saldo:"00:00",abonos:"00:00",intervalos:X(h),horaEntrada:n,horaSaida:a,status:I}}function T(){const t=document.querySelectorAll("h3");for(const e of t)if((e.textContent??"").trim().includes("Seu Extrato Hoje")){const n=e.closest(".border");if(n)return n}return null}function J(){const t=document.querySelectorAll("button");for(const e of t){const n=(e.textContent??"").trim();if(n==="Registrar Entrada"||n==="Registrar Nova Entrada"||n==="Registrar Saída"||n==="Registrar Nova Saída")return n}return null}function X(t){const e=Math.floor(t/60),n=t%60;return`${String(e).padStart(2,"0")}:${String(n).padStart(2,"0")}`}function $(t,e,n=new Date){const a=n.getTime(),o=Q(n);if(t.horaEntrada){const r=x(t.horaEntrada),c=z(e),h=z(t.intervalos),I=c+h,d=r+I,g=(t.horaSaida?x(t.horaSaida):null)??B(n),u=Math.max(0,d-g),l=Math.max(0,g-r-h);if(t.horaSaida){const s=Math.max(0,c-l);return{saidaPrevistaMin:d,saidaPrevista:v(d),restanteMin:0,podeAlertar:!1,atualizadoEm:a,dataReferencia:o,estado:"done",progresso:Y(l,c),textoRestante:s>0?`Faltam ${m(s)}`:"Expediente completo!",textoTrabalhadas:l>0?m(l):"--",horasDiarias:e}}if(u>0){const s=Math.max(0,B(n)-r);return{saidaPrevistaMin:d,saidaPrevista:v(d),restanteMin:u,podeAlertar:!1,atualizadoEm:a,dataReferencia:o,estado:"working",progresso:Y(s,I),textoRestante:`Faltam ${m(u)}`,textoTrabalhadas:l>0?m(l):"--",horasDiarias:e}}return{saidaPrevistaMin:d,saidaPrevista:v(d),restanteMin:0,podeAlertar:!0,atualizadoEm:a,dataReferencia:o,estado:"overtime",progresso:100,textoRestante:"Hora de bater o ponto!",textoTrabalhadas:l>0?m(l):"--",horasDiarias:e}}return{saidaPrevistaMin:null,saidaPrevista:"--:--",restanteMin:0,podeAlertar:!1,atualizadoEm:a,dataReferencia:o,estado:"done",progresso:0,textoRestante:"Aguardando registros...",textoTrabalhadas:"--",horasDiarias:e}}function B(t){return D(t)}function Q(t){const e=t.getFullYear(),n=String(t.getMonth()+1).padStart(2,"0"),a=String(t.getDate()).padStart(2,"0");return`${e}-${n}-${a}`}let C=p,i=null,E=0;function R(){Promise.all([V(),_()]).then(([t,e])=>{C=t??p,j(C),e&&G(e),K()})}function K(){i=new MutationObserver(()=>{P()&&(i==null||i.disconnect(),i=null,w())}),i.observe(document.body,{childList:!0,subtree:!0}),F()}function F(){if(P()){i==null||i.disconnect(),i=null,w();return}E++,E<10?setTimeout(F,3e3):(i==null||i.disconnect(),i=null,w())}function w(){M(),window.setInterval(M,3e4)}function M(){const t=P();if(t){const e=$(t,C);G(e),O(e)}else{const e=document.getElementById("gt-tempo-restante");e&&(e.textContent="Aguardando dados...")}}async function V(){var t;if(!((t=chrome==null?void 0:chrome.storage)!=null&&t.local))return null;try{return(await chrome.storage.local.get(f))[f]||null}catch{return null}}function O(t){var e;(e=chrome==null?void 0:chrome.storage)!=null&&e.local&&chrome.storage.local.set({[y]:t})}async function _(){var t;if(!((t=chrome==null?void 0:chrome.storage)!=null&&t.local))return null;try{const n=(await chrome.storage.local.get(y))[y];return n&&typeof n=="object"&&typeof n.saidaPrevista=="string"&&typeof n.restanteMin=="number"?n:null}catch{return null}}(L=chrome==null?void 0:chrome.storage)!=null&&L.onChanged&&chrome.storage.onChanged.addListener(t=>{t[f]&&(C=t[f].newValue??p,M())}),document.readyState==="complete"?R():window.addEventListener("load",()=>R())})();
+(function(){"use strict";var _;const S="genyoTimerStatus",g="genyoTimerDailyHours",f="08:00";function D(t){return t.replace(/[&<>"']/g,n=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"})[n])}const L=`#genyo-timer-floating-bar {\r
+  position: fixed;\r
+  bottom: 0;\r
+  left: 0;\r
+  right: 0;\r
+  z-index: 999999;\r
+  font-family: 'Open Sans', sans-serif;\r
+  font-size: 13px;\r
+}\r
+.gt-container {\r
+  background: rgba(30, 30, 40, 0.92);\r
+  color: #e0e0e0;\r
+  padding: 6px 16px;\r
+  display: flex;\r
+  justify-content: center;\r
+  align-items: center;\r
+  backdrop-filter: blur(6px);\r
+  border-top: 1px solid rgba(255,255,255,0.1);\r
+}\r
+.gt-row {\r
+  display: flex;\r
+  align-items: center;\r
+  gap: 10px;\r
+  max-width: 700px;\r
+  width: 100%;\r
+}\r
+.gt-label { font-size: 14px; }\r
+.gt-value { font-weight: 600; min-width: 110px; }\r
+.gt-sep { color: rgba(255,255,255,0.2); }\r
+.gt-progress-container {\r
+  flex: 1;\r
+  height: 6px;\r
+  background: rgba(255,255,255,0.15);\r
+  border-radius: 3px;\r
+  overflow: hidden;\r
+}\r
+.gt-progress-bar {\r
+  display: block;\r
+  height: 100%;\r
+  width: 0%;\r
+  background: #4caf50;\r
+  border-radius: 3px;\r
+  transition: width 30s linear;\r
+}\r
+.gt-status-working .gt-progress-bar { background: #ff9800; }\r
+.gt-status-overtime .gt-progress-bar { background: #f44336; }\r
+.gt-status-done .gt-progress-bar { background: #4caf50; }\r
+.gt-input-wrapper {\r
+  position: relative;\r
+  display: flex;\r
+  align-items: center;\r
+  gap: 4px;\r
+  background: rgba(255,255,255,0.1);\r
+  border-radius: 4px;\r
+  padding: 2px 6px;\r
+}\r
+.gt-input {\r
+  width: 42px;\r
+  background: transparent;\r
+  border: none;\r
+  color: #e0e0e0;\r
+  font-family: monospace;\r
+  font-size: 13px;\r
+  font-weight: 600;\r
+  outline: none;\r
+  text-align: center;\r
+  padding: 2px 0;\r
+}\r
+.gt-input::placeholder { color: rgba(255,255,255,0.3); }\r
+.gt-input-label {\r
+  font-size: 10px;\r
+  color: rgba(255,255,255,0.5);\r
+  text-transform: uppercase;\r
+}\r
+.gt-input-info {\r
+  display: inline-flex;\r
+  align-items: center;\r
+  justify-content: center;\r
+  width: 14px;\r
+  height: 14px;\r
+  border-radius: 50%;\r
+  background: rgba(255,255,255,0.15);\r
+  color: rgba(255,255,255,0.4);\r
+  font-size: 9px;\r
+  font-weight: 700;\r
+  font-style: italic;\r
+  font-family: serif;\r
+  cursor: help;\r
+  line-height: 1;\r
+  flex-shrink: 0;\r
+}\r
+.gt-input-info:hover {\r
+  background: rgba(255,255,255,0.3);\r
+  color: rgba(255,255,255,0.9);\r
+}\r
+.gt-input-tooltip {\r
+  display: none;\r
+  position: absolute;\r
+  bottom: calc(100% + 8px);\r
+  left: 50%;\r
+  transform: translateX(-50%);\r
+  background: rgba(0,0,0,0.85);\r
+  color: #e0e0e0;\r
+  font-size: 11px;\r
+  white-space: nowrap;\r
+  padding: 4px 10px;\r
+  border-radius: 4px;\r
+  pointer-events: none;\r
+  z-index: 10;\r
+}\r
+.gt-input-info:hover + .gt-input-tooltip {\r
+  display: block;\r
+}\r
+`,z=`<div class="gt-container">\r
+  <div class="gt-row">\r
+    <div class="gt-input-wrapper">\r
+      <input\r
+        id="{{INPUT_ID}}"\r
+        class="gt-input"\r
+        type="text"\r
+        maxlength="5"\r
+        placeholder="08:00"\r
+        value="{{HORAS_SALVAS}}"\r
+      />\r
+      <span class="gt-input-label">hrs/dia</span>\r
+      <span class="gt-input-info" aria-label="Jornada diária">i</span>\r
+      <span class="gt-input-tooltip">Jornada diária no formato HH:MM</span>\r
+    </div>\r
+    <span class="gt-sep">|</span>\r
+    <span class="gt-label">⏳</span>\r
+    <span class="gt-value" id="gt-tempo-restante">Carregando...</span>\r
+    <span class="gt-sep">|</span>\r
+    <span class="gt-label">⏱</span>\r
+    <span class="gt-value" id="gt-tempo-trabalhado">--</span>\r
+    <span class="gt-sep">|</span>\r
+    <div class="gt-progress-container">\r
+      <div class="gt-progress-bar" id="gt-progress-bar"></div>\r
+    </div>\r
+    <span class="gt-sep">|</span>\r
+    <span class="gt-label">🏁</span>\r
+    <span class="gt-value" id="gt-saida-prevista">--:--</span>\r
+  </div>\r
+</div>\r
+`,M="genyo-timer-floating-bar",E="gt-daily-hours-input";function N(t){const n=document.getElementById(M);if(n)return n;const r=z.replace("{{INPUT_ID}}",E).replace("{{HORAS_SALVAS}}",D(t)),e=document.createElement("div");e.id=M,e.innerHTML=r,q();const a=e.querySelector(`#${E}`);return a&&(a.addEventListener("blur",()=>O(a)),a.addEventListener("keydown",o=>{o.key==="Enter"&&a.blur()}),a.addEventListener("input",()=>{a.value.length===2&&!a.value.includes(":")&&(a.value=a.value+":")})),document.body.appendChild(e),e}function A(t){const n=document.getElementById("gt-tempo-restante"),r=document.getElementById("gt-tempo-trabalhado"),e=document.getElementById("gt-progress-bar"),a=document.getElementById("gt-saida-prevista"),o=document.getElementById(M),l=document.getElementById(E);!n||!r||!e||!a||!o||(n.textContent=t.textoRestante,r.textContent=t.textoTrabalhadas,a.textContent=t.estado==="done"&&t.saidaPrevistaMin===null?"✓":t.saidaPrevista,o.className=`gt-status-${t.estado}`,e.style.width=`${t.progresso}%`,l&&l!==document.activeElement&&(l.value=t.horasDiarias))}function O(t){var a;let n=t.value.replace(/[^0-9:]/g,"");const r=/^(\d{1,2}):(\d{2})$/,e=n.match(r);if(!e)t.value=f,n=f;else{const o=parseInt(e[1],10),l=Math.min(parseInt(e[2],10),59);n=`${String(o).padStart(2,"0")}:${String(l).padStart(2,"0")}`,t.value=n}(a=chrome==null?void 0:chrome.storage)!=null&&a.local&&chrome.storage.local.set({[g]:n})}function q(){if(document.getElementById("genyo-timer-styles"))return;const t=document.createElement("style");t.id="genyo-timer-styles",t.textContent=L,document.head.appendChild(t)}function R(t){const n=t.trim();if(!n||n==="-")return 0;const r=n.startsWith("-"),[e,a]=n.replace(/^-/,"").split(":").map(Number),o=e*60+a;return r?-o:o}function m(t){const n=Math.abs(t),r=Math.floor(n/60),e=n%60;return r===0?`${e}min`:e===0?`${r}h`:`${r}h${e}min`}function v(t){const[n,r]=t.split(":").map(Number);return n*60+r}function Y(t=new Date){return t.getHours()*60+t.getMinutes()}function w(t){const n=Math.floor(t/60)%24,r=t%60;return`${String(n).padStart(2,"0")}:${String(r).padStart(2,"0")}`}function k(t,n){return n===0?0:Math.min(100,Math.round(t/n*100))}function I(){var d;const t=F();if(!t)return null;const n=t.querySelectorAll(":scope > .space-y-4 > div");if(n.length===0)return null;let r=null,e=null,a=null,o=null;const l=U();for(const x of n){const p=x.querySelector("p");if(!p)continue;const u=(p.textContent??"").trim(),c=x.querySelector(".text-lg, .font-mono"),i=((d=c==null?void 0:c.textContent)==null?void 0:d.trim())??null;u==="Entrada"&&i?r=i:u==="Saída"&&i?e=i:u==="Início da Pausa"&&i?a=i:u==="Retorno da Pausa"&&i&&(o=i)}let h=0;if(a&&o){const x=v(a),p=v(o);h=Math.max(0,p-x)}let b="desconhecido";return l&&(b=l.includes("Entrada")?"Saida":"Entrada"),{horasPrevistas:"00:00",horasTrabalhadas:"00:00",saldo:"00:00",abonos:"00:00",intervalos:j(h),horaEntrada:r,horaSaida:e,status:b}}function F(){const t=document.querySelectorAll("h3");for(const n of t)if((n.textContent??"").trim().includes("Seu Extrato Hoje")){const r=n.closest(".border");if(r)return r}return null}function U(){const t=document.querySelectorAll("button");for(const n of t){const r=(n.textContent??"").trim();if(r==="Registrar Entrada"||r==="Registrar Nova Entrada"||r==="Registrar Saída"||r==="Registrar Nova Saída")return r}return null}function j(t){const n=Math.floor(t/60),r=t%60;return`${String(n).padStart(2,"0")}:${String(r).padStart(2,"0")}`}function G(t,n,r=new Date){const e=r.getTime(),a=J(r);if(t.horaEntrada){const o=v(t.horaEntrada),l=R(n),h=R(t.intervalos),b=l+h,d=o+b,p=(t.horaSaida?v(t.horaSaida):null)??$(r),u=Math.max(0,d-p),c=Math.max(0,p-o-h);if(t.horaSaida){const i=Math.max(0,l-c);return{saidaPrevistaMin:d,saidaPrevista:w(d),restanteMin:0,podeAlertar:!1,atualizadoEm:e,dataReferencia:a,estado:"done",progresso:k(c,l),textoRestante:i>0?`Faltam ${m(i)}`:"Expediente completo!",textoTrabalhadas:c>0?m(c):"--",horasDiarias:n}}if(u>0){const i=Math.max(0,$(r)-o);return{saidaPrevistaMin:d,saidaPrevista:w(d),restanteMin:u,podeAlertar:!1,atualizadoEm:e,dataReferencia:a,estado:"working",progresso:k(i,b),textoRestante:`Faltam ${m(u)}`,textoTrabalhadas:c>0?m(c):"--",horasDiarias:n}}return{saidaPrevistaMin:d,saidaPrevista:w(d),restanteMin:0,podeAlertar:!0,atualizadoEm:e,dataReferencia:a,estado:"overtime",progresso:100,textoRestante:"Hora de bater o ponto!",textoTrabalhadas:c>0?m(c):"--",horasDiarias:n}}return{saidaPrevistaMin:null,saidaPrevista:"--:--",restanteMin:0,podeAlertar:!1,atualizadoEm:e,dataReferencia:a,estado:"done",progresso:0,textoRestante:"Aguardando registros...",textoTrabalhadas:"--",horasDiarias:n}}function $(t){return Y(t)}function J(t){const n=t.getFullYear(),r=String(t.getMonth()+1).padStart(2,"0"),e=String(t.getDate()).padStart(2,"0");return`${n}-${r}-${e}`}let y=f,s=null,H=0;function B(){Promise.all([K(),X()]).then(([t,n])=>{y=t??f,N(y),n&&A(n),V()})}function V(){s=new MutationObserver(()=>{I()&&(s==null||s.disconnect(),s=null,P())}),s.observe(document.body,{childList:!0,subtree:!0}),C()}function C(){if(I()){s==null||s.disconnect(),s=null,P();return}H++,H<10?setTimeout(C,3e3):(s==null||s.disconnect(),s=null,P())}function P(){T(),window.setInterval(T,3e4)}function T(){const t=I();if(t){const n=G(t,y);A(n),W(n)}else{const n=document.getElementById("gt-tempo-restante");n&&(n.textContent="Aguardando dados...")}}async function K(){var t;if(!((t=chrome==null?void 0:chrome.storage)!=null&&t.local))return null;try{return(await chrome.storage.local.get(g))[g]||null}catch{return null}}function W(t){var n;(n=chrome==null?void 0:chrome.storage)!=null&&n.local&&chrome.storage.local.set({[S]:t})}async function X(){var t;if(!((t=chrome==null?void 0:chrome.storage)!=null&&t.local))return null;try{const r=(await chrome.storage.local.get(S))[S];return r&&typeof r=="object"&&typeof r.saidaPrevista=="string"&&typeof r.restanteMin=="number"?r:null}catch{return null}}(_=chrome==null?void 0:chrome.storage)!=null&&_.onChanged&&chrome.storage.onChanged.addListener(t=>{t[g]&&(y=t[g].newValue??f,T())}),document.readyState==="complete"?B():window.addEventListener("load",()=>B())})();

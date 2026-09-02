@@ -1,10 +1,24 @@
-import { cpSync, rmSync } from "node:fs";
+import { cpSync, readFileSync, rmSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { build } from "vite";
 
 const rootDir = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const outDir = resolve(rootDir, "dist");
+
+function rawImportPlugin() {
+  return {
+    name: "raw-import",
+    enforce: "pre",
+    load(id) {
+      if (id.endsWith("?raw")) {
+        const filePath = id.replace(/\?raw$/, "");
+        const content = readFileSync(filePath, "utf-8");
+        return `export default ${JSON.stringify(content)};`;
+      }
+    },
+  };
+}
 
 const entries = [
   ["content", "src/core/content.ts"],
@@ -20,7 +34,7 @@ for (const [name, input] of entries) {
     root: rootDir,
     configFile: false,
     publicDir: false,
-    assetsInclude: ["**/*.html"],
+    plugins: [rawImportPlugin()],
     build: {
       outDir,
       emptyOutDir: false,
